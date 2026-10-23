@@ -1,3 +1,8 @@
+import sys
+import os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from keep_alive import keep_alive
+
 # bot/main.py
 # نقطة الدخول: اعداد اللوگ، تسجيل الهاندلرز، معالجة الأخطاء، وتشغيل البوت
 # التشغيل: python -m bot.main
@@ -135,6 +140,7 @@ def build_application() -> Application:
 def main() -> None:
     setup_logging()
     logger.info("Starting bot...")
+    keep_alive()   # ⬅️ السطر الجديد الوحيد
     build_application().run_polling(
         allowed_updates=Update.ALL_TYPES,
         drop_pending_updates=True,
