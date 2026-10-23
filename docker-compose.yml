@@ -1,0 +1,17 @@
+# docker-compose.yml
+# تشغيل البوت بأمر واحد: docker compose up -d --build
+
+services:
+  bot:
+    build: .
+    container_name: tgbot
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      # قاعدة البيانات داخل مجلد محفوظ حتى ما تضيع بعد اعادة التشغيل
+      DATABASE_URL: sqlite+aiosqlite:////app/data/bot.db
+    volumes:
+      - botdata:/app/data
+
+volumes:
+  botdata:
